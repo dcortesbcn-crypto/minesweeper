@@ -16,6 +16,18 @@ public class Minesweeper {
     private final HashSet<TilePosition> minePositions;
 
     public Minesweeper(int numRows, int numColumns, int maxNumberFlags, ArrayList<TilePosition> minePositions){
+        if(maxNumberFlags < minePositions.size()) {
+            throw new IllegalStateException("Flags needs to be at least the number of mines");
+        }
+
+        if(numColumns < 1) {
+            throw new IllegalStateException("number of Columns needs to be higher or equal than one");
+        }
+
+        if(numRows < 1) {
+            throw new IllegalStateException("number of Rows needs to be higher or equal than one");
+        }
+
         this.numRows = numRows;
         this.numColumns = numColumns;
         this.maxNumberFlags = maxNumberFlags;
@@ -45,7 +57,6 @@ public class Minesweeper {
         while (mines.size() < numberMines) {
             mines.add(new TilePosition(random.nextInt(numRows), random.nextInt(numColumns)));
         }
-        System.out.println(mines);
         return new ArrayList<>(mines);
     }
 
@@ -74,7 +85,6 @@ public class Minesweeper {
     }
 
     public boolean isGameWined() {
-
-        return !flagPositions.isEmpty() && flagPositions.containsAll(minePositions);
+        return flagPositions.containsAll(minePositions);
     }
 }
