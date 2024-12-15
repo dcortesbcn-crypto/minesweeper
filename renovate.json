@@ -1,0 +1,26 @@
+{
+  "extends": ["config:recommended"],
+  "ignorePresets": ["workarounds:javaLTSVersions"],
+  "timezone": "Europe/Madrid",
+  "schedule": ["* 16 * * *"],
+  "packageRules": [
+    {
+      "matchDatasources": ["maven", "gradle-version"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Automatically merge minor updates",
+      "matchUpdateTypes": ["minor"],
+      "groupName": "All Minor Updates",
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Create PRs for major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
+}
